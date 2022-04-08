@@ -1,7 +1,8 @@
 import random
+
 import telebot
 
-token = ""
+token = "5214973826:AAEm9_nKiqS5nOcAz_fwmre-3ZP3rS1HU8Y"
 
 bot = telebot.TeleBot(token)
 
@@ -55,12 +56,15 @@ def show(message):
     command = message.text.split(maxsplit=1)
     date = command[1].lower()
     text = ""
+    i = 0
     if date in tasks:
-        text = date.upper() +"\n"
+        text = date.upper() + ":\n"
         for task in tasks[date]:
-            text = text + "[] " + task +"\n"
+            i = i + 1
+            text = text + f'{i}. ' + task + '\n'
     else:
         text = "On is date taks is none"
     bot.send_message(message.chat.id, text)
+
 
 bot.polling(none_stop=True)
